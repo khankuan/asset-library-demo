@@ -10,7 +10,7 @@ const UserApi = {
   },
 
   hasSession: (req, res, next) => {
-    next(req.session ? null : 'You are not logged in');
+    next(req.session && req.session.userId ? null : 'You are not logged in');
   },
 
   populateSession: (req, res, next) => {

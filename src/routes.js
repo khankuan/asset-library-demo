@@ -1,37 +1,98 @@
-/*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+import React from 'react'
+import { Router, Route, Link } from 'react-router';
+import { resolve, context } from "react-resolver";
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-import React from 'react';
-import Router from 'react-routing/src/Router';
-import http from './core/HttpClient';
-import App from './components/App';
-import ContentPage from './components/ContentPage';
-import ContactPage from './components/ContactPage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
-import NotFoundPage from './components/NotFoundPage';
-import ErrorPage from './components/ErrorPage';
+const App = React.createClass({
+  render() {
+    return (
+      <div>
+        <h1>App</h1>
+        <ul>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/inbox">Inbox</Link></li>
+        </ul>
+        {this.props.children}
+      </div>
+    )
+  }
+})
 
-const router = new Router(on => {
-  on('*', async (state, next) => {
-    const component = await next();
-    return component && <App context={state.context}>{component}</App>;
+const About = React.createClass({
+  render() {
+    return <h3>About</h3>
+  }
+})
+
+
+@context('alt')
+@resolve('', ({color, alt}) => {
+  if (typeof window !== undefined) return;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("fetched test!")
+      resolve(()=>{});
+    }, 1000);
   });
+})
+class Test extends React.Component {
+  render() {
+    return (
+      <button>Test</button>
+    );
+  }
+}
 
-  on('/contact', async () => <ContactPage />);
-
-  on('/login', async () => <LoginPage />);
-
-  on('/register', async () => <RegisterPage />);
-
-  on('*', async (state) => {
-    const content = await http.get(`/api/content?path=${state.path}`);
-    return content && <ContentPage {...content} />;
+@resolve('', () => {
+  if (typeof window !== undefined) return;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("fetched inbox!")
+      resolve(()=>{});
+    }, 1000);
   });
+})
+class Inbox extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>Inbox</h2>
+        <div>
+          <Link to='/inbox/messages/5'>You have 1 new message</Link>
+        </div>
+        {this.props.children || "Welcome to your Inbox"}
+        <Test color='pink' />
+      </div>
+    )
+  }
+}
 
-  on('error', (state, error) => state.statusCode === 404 ?
-    <App context={state.context} error={error}><NotFoundPage /></App> :
-    <App context={state.context} error={error}><ErrorPage /></App>
-  );
-});
+@resolve('', props => {
+  if (typeof window !== undefined) return;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("fetched message!")
+      resolve(()=>{});
+    }, 2000);
+  });
+})
+class Message extends React.Component {
+  render() {
+    return <h3>Message {this.props.params.id}</h3>
+  }
+}
 
-export default router;
+const router = (
+  <Router
+    history={typeof window === 'undefined' ? null : createBrowserHistory()}
+    location="history">
+    <Route path="/" component={App}>
+      <Route path="about" component={About} />
+      <Route path="inbox" component={Inbox}>
+        <Route path="messages/:id" component={Message} />
+      </Route>
+    </Route>
+  </Router>
+);
+
+module.exports = router;
