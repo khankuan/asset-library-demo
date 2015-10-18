@@ -1,7 +1,11 @@
+import cookieParser from 'cookie-parser';
+
 import api from './api';
 import db from './models';
 
 module.exports = (server) => {
+  server.use(cookieParser());
+
   //  Set db module for each request
   server.use((req, res, next) => {
     req.models = db.models;

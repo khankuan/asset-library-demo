@@ -1,0 +1,18 @@
+.btn {
+  border: none;
+  border-radius: 3px;
+  color: white;
+}
+
+.btn-size-tiny { font-size: 10px; padding: 2px; }
+.btn-size-small { font-size: 13px; padding: 4px; }
+.btn-size-base { font-size: 16px; padding: 8px; }
+.btn-size-large { font-size: 24px; padding: 12px; }
+.btn-size-huge { font-size: 32px; padding: 16px; }
+
+.btn-type-primary { background-color: #3498db; }
+.btn-type-danger { background-color: #e74c3c; }
+.btn-type-warning { background-color: #f1c40f; }
+.btn-type-success { background-color: #2ecc71;; }
+.btn-type-default { background-color: #bdc3c7; }
+.btn-type-flat { background: none; }

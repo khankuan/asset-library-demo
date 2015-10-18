@@ -5,6 +5,8 @@ import withAlt from './decorators/withAlt';
 import AppAlt from './core/AppAlt';
 import Api from './api';
 
+import './sass/index.scss';
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Client ready');
   const api = new Api();

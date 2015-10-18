@@ -1,9 +1,11 @@
 import sequelize from './db.js';
 import crypto from 'crypto';
 
-import User from './User.js';
+import user from './User.js';
 
-const Session = sequelize.define('Session', {}, {
+const Session = sequelize.define('Session', {
+  token: { type: 'string' },
+}, {
   instanceMethods: {
     generateToken: function () {
       return new Promise((resolve, reject) => {
@@ -21,6 +23,6 @@ const Session = sequelize.define('Session', {}, {
   },
 });
 
-Session.belongsTo(User);
+Session.belongsTo(user, {foreignKey: 'userId'});
 
 module.exports = Session;

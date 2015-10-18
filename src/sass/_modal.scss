@@ -1,0 +1,29 @@
+@-webkit-keyframes modalFadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-animation: modalFadeIn 0.3s;
+  background: pink;
+}
+
+.modal-close {
+  font-size: '24px';
+  opacity: 0.7;
+  color: black;
+  cursor: pointer;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  -webkit-transition: opacity 0.3s ease;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}

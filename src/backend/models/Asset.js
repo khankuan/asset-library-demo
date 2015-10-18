@@ -10,8 +10,14 @@ const Asset = sequelize.define('Asset', {
 }, {
   instanceMethods: {
     getCategory: function () {
-      return this.contentType.substring(this.contentType.indexOf('/'));
+      return this.contentType.substring(0, this.contentType.indexOf('/'));
     },
+
+    toObject: function (){
+      const obj = this.toJSON();
+      delete obj.data;
+      return obj;
+    }
   },
 
   // Lifecycle Callbacks

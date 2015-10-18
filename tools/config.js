@@ -160,8 +160,8 @@ const appConfig = merge({}, config, {
       } : JS_LOADER,
       ...config.module.loaders,
       {
-        test: /\.css$/,
-        loader: 'style-loader/useable!css-loader!postcss-loader',
+        test: /\sass|.s?css$/,
+        loader: 'style-loader/useable!css-loader!postcss-loader!sass-loader',
       },
     ],
   },
@@ -208,8 +208,8 @@ const serverConfig = merge({}, config, {
       JS_LOADER,
       ...config.module.loaders,
       {
-        test: /\.css$/,
-        loader: 'css-loader!postcss-loader',
+        test: /\.sass|s?css$/,
+        loader: 'css!sass?sourceMap',
       },
     ],
   },

@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 
-
 /*
   modified from: https://raw.githubusercontent.com/erikras/react-redux-universal-hot-example/master/src/helpers/ApiClient.js
 */
@@ -26,9 +25,11 @@ class ApiClient_ {
                 request.set('cookie', req.get('cookie'));
               }
             }
+
             if (options && options.data) {
               request.send(options.data);
             }
+
             request.end((err, res) => {
               if (err) {
                 reject((res && res.body) || err);
@@ -46,7 +47,7 @@ class ApiClient_ {
     const adjustedPath = path[0] !== '/' ? '/' + path : path;
     if (req) {
       // Prepend host and port of the API server to the path.
-      return 'http://localhost:' + req.app.settings.port + adjustedPath;
+      return 'http://localhost:' + req.app.settings.port + '/api' + adjustedPath;
     }
     // Prepend `/api` to relative URL, to proxy to API server.
     return '/api' + adjustedPath;

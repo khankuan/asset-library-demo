@@ -10,14 +10,19 @@ const UserApi = {
   },
 
   hasSession: (req, res, next) => {
-    next(req.session && req.session.userId ? null : 'You are not logged in');
+    if (!req.session || !req.session.userId) {
+      next('You are not logged in');
+    } else {
+      next();
+    }
   },
 
   populateSession: (req, res, next) => {
-    return req.models.Session.findOne({ token: req.cookie ? req.cookie.token : '' })
+    return req.models.Session.findOne({ token: req.cookies ? req.cookies.token : '' })
       .then(session => {
         req.session = session;
-      }).finally(() => {
+      })
+      .finally(() => {
         next();
       });
   },
@@ -29,11 +34,12 @@ const UserApi = {
     return req.models.User.findOne({ email })
       .then(_user => {
         user = _user;
-        return user.hasPasswordsEquals(password);
+        return user.hasPasswordEquals(password);
       })
       .then(UserApi._createSession.bind(null, req))
       .then(session => {
-        res.send({ token: session.token, user: user.toObject() });
+        res.cookie('token', session.token);
+        res.send(user.toObject());
       }, next);
   },
 
@@ -48,7 +54,8 @@ const UserApi = {
         return UserApi._createSession(req, user);
       })
       .then(session => {
-        res.send({ token: session.token, user: user.toObject() });
+        res.cookie('token', session.token);
+        res.send(user.toObject());
       }, next);
   },
 
@@ -72,7 +79,11 @@ const UserApi = {
   get: (req, res, next) => {
     return req.models.User.findById(req.params.userId)
       .then(user => {
-        res.send(user.toProfile());
+        if (user) {
+          res.status(200).send(user.toProfile());
+        } else {
+          res.status(404).send('User not found');
+        }
       }, next);
   },
 };

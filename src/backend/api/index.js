@@ -20,6 +20,7 @@ module.exports = (server) => {
   server.get('/api/assets/newest', AssetApi.getNewest);
   server.get('/api/assets/category/:category', AssetApi.getByCategory);
   server.get('/api/assets/:assetId', AssetApi.getAsset);
-  server.get('/api/assets/:assetId/liked_by', LikeApi.getAssetLikedByUsers);
-  server.post('/api/assets', UserApi.hasSession, upload.single('asset'), AssetApi.createAsset);
+  server.get('/api/assets/:assetId/download', AssetApi.getAssetData);
+  server.get('/api/assets/:assetId/liked', LikeApi.getAssetLikedUsers);
+  server.post('/api/assets', upload.single('file'), AssetApi.createAsset);
 };
