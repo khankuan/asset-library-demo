@@ -52,6 +52,16 @@ const UserApi = {
       }, next);
   },
 
+  signOut: (req, res, next) => {
+    return req.models.Session.findById(req.session.id)
+      .then(session => {
+        return session.destroy();
+      })
+      .then(() => {
+        res.send();
+      }, next);
+  },
+
   me: (req, res, next) => {
     return req.models.User.findById(req.session.userId)
       .then(user => {
