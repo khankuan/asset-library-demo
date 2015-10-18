@@ -64,7 +64,8 @@ backend(server).then(() => {
     }).then(resolve => {
       console.log('Server rendering');
       const html = ReactDOMServer.renderToString(<resolve.Resolved />);
-      res.render('app', { html });
+      const store = alt.takeSnapshot();
+      res.render('app', { html, store });
     }).catch(err => {
       next(err);
     });

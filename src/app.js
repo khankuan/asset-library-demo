@@ -1,5 +1,3 @@
-
-import { render } from 'react-dom';
 import AppRouter from './routes';
 import React from 'react';
 import { Resolver } from 'react-resolver';
@@ -11,10 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Client ready');
   const api = new Api();
   const alt = new AppAlt(api);
+  alt.bootstrap(window.__INITIAL_DATA__);
   const Root = withAlt(alt)(AppRouter);
 
   Resolver.render(() => {
-    console.log('Client rendering')
+    console.log('Client rendering');
     return (
       <Root />
     );

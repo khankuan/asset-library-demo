@@ -10,6 +10,7 @@
 <body>
   <script src="/app.js"></script>
   <div id='app'><%- html %></div>
+  <script>window.__INITIAL_DATA__ = <%- JSON.stringify(store) %> </script>
 </body>
 
 </html>
