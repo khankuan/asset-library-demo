@@ -8,7 +8,7 @@ export default class OnboardingStore {
       onFetchCategory: CategoryPageActions.fetchCategory,
       onFetchCategorySuccess: CategoryPageActions.fetchCategorySuccess,
       onFetchCategoryError: CategoryPageActions.fetchCategoryError,
-      onCreateSuccess: AssetActions.createSuccess
+      onCreateSuccess: AssetActions.createSuccess,
     });
 
     this.state = {

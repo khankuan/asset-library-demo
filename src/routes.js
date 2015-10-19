@@ -16,7 +16,9 @@ const router = (
     location="history">
     <Route path="/" component={App}>
       <IndexRoute component={HomePage} />
-      <Route path="/category/:category" component={CategoryPage} />
+      <Route path="/category/:category">
+        <IndexRoute component={CategoryPage} />
+      </Route>
       <Route path="/assets/:assetId" component={AssetPage} />
     </Route>
   </Router>

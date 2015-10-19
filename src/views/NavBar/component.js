@@ -88,9 +88,9 @@ export default class NavBar extends React.Component {
     return (
       <div className="nav">
         <ul className="nav-left">
-          <li><strong><Link to="/">Home</Link></strong></li>
-          <li><strong><Link to="/category/audio">Audio</Link></strong></li>
-          <li><strong><Link to="/category/image">Images</Link></strong></li>
+          <li><Link to="/" activeClassName="active" onlyActiveOnIndex><strong>Home</strong></Link></li>
+          <li><Link to="/category/audio" activeClassName="active" onlyActiveOnIndex><strong>Audio</strong></Link></li>
+          <li><Link to="/category/image" activeClassName="active" onlyActiveOnIndex><strong>Images</strong></Link></li>
         </ul>
         <ul className="nav-right">
           {!authUser ? this.renderSignUp() : null}

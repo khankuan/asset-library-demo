@@ -9,8 +9,8 @@ import Component from './component';
   const alt = props.alt;
   const store = alt.getStore('CategoryPage').getState();
   if (store.fetchState === null ||
-      store.category !== props.routeParams.category) {
-    return alt.getActions('CategoryPage').fetchCategory(props.routeParams.category).then(() => {}, () => {});
+      store.category !== props.params.category) {
+    return alt.getActions('CategoryPage').fetchCategory(props.params.category).then(() => {}, () => {});
   }
 })
 export default class CategoryPage extends React.Component {

@@ -13,13 +13,6 @@
     float: right;
   }
 
-  a {
-    color: white;
-    text-decoration: none;
-    padding: 8px;
-    display: inline-block;
-  }
-
   ul {
     list-style: none;
     margin: 0;
@@ -29,6 +22,17 @@
       display: inline-block;
       padding: 8px;
       margin: 0;
+
+      a {
+        color: #ccc;
+        text-decoration: none;
+        padding: 8px;
+        display: inline-block;
+      }
+
+      .active {
+        color: white;
+      }
     }
   }
 
