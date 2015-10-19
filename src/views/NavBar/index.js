@@ -21,6 +21,7 @@ export default class NavBar extends React.Component {
     return (
       <AltContainer stores={{
         AuthStore: this.context.alt.getStore('Auth'),
+        NavDrawerStore: this.context.alt.getStore('NavDrawer'),
       }}>
         <Component {...this.props} />
       </AltContainer>

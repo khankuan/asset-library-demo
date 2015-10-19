@@ -9,13 +9,14 @@ export default class NavBar extends React.Component {
 
   static propTypes = {
     AuthStore: React.PropTypes.object,
+    NavDrawerStore: React.PropTypes.object,
   }
 
   static contextTypes = {
     alt: React.PropTypes.object.isRequired,
   }
 
-  constructor(props, context) {
+  constructor(props) {
     super(props);
   }
 
@@ -63,6 +64,8 @@ export default class NavBar extends React.Component {
   }
 
   renderProfileButton(authUser) {
+    const navOpen = this.props.NavDrawerStore.show;
+
     return (
       <li>
         <Button type="flat" onClick={ this._handleUploadClick }>
@@ -75,7 +78,7 @@ export default class NavBar extends React.Component {
             onChange={ this._handleUpload }
             value="" />
         </Button>
-        <Button type="flat" onClick={ this._handleProfile }>
+        <Button type={navOpen ? 'default' : 'flat'} onClick={ this._handleProfile }>
            Hi, { authUser.name }
         </Button>
       </li>
@@ -88,9 +91,9 @@ export default class NavBar extends React.Component {
     return (
       <div className="nav">
         <ul className="nav-left">
-          <li><Link to="/" activeClassName="active" onlyActiveOnIndex><strong>Home</strong></Link></li>
-          <li><Link to="/category/audio" activeClassName="active" onlyActiveOnIndex><strong>Audio</strong></Link></li>
-          <li><Link to="/category/image" activeClassName="active" onlyActiveOnIndex><strong>Images</strong></Link></li>
+          <li><Link to="/" activeClassName="active">Home</Link></li>
+          <li><Link to="/category/audio" activeClassName="active" onlyActiveOnIndex>Audio</Link></li>
+          <li><Link to="/category/image" activeClassName="active" onlyActiveOnIndex>Images</Link></li>
         </ul>
         <ul className="nav-right">
           {!authUser ? this.renderSignUp() : null}
