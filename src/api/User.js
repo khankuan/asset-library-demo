@@ -15,6 +15,10 @@ export default class User {
     });
   }
 
+  signOut() {
+    return this.request.post('/users/signout');
+  }
+
   me() {
     return this.request.get('/users/me');
   }

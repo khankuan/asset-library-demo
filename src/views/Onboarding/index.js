@@ -23,7 +23,7 @@ export default class OnboardingPage extends React.Component {
         AuthStore: this.context.alt.getStore('Auth'),
         OnboardingStore: this.context.alt.getStore('Onboarding'),
       }}>
-        <Component />
+        <Component {...this.props}/>
       </AltContainer>
     );
   }

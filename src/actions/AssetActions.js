@@ -18,5 +18,21 @@ export default function(api) {
       this.dispatch(error);
       return error;
     }
+
+    get(assetId) {
+      this.dispatch(assetId);
+      return api.Asset.get(assetId)
+        .then(this.actions.getSuccess, this.actions.getError);
+    }
+
+    getSuccess(asset) {
+      this.dispatch(asset);
+      return asset;
+    }
+
+    getError(error) {
+      this.dispatch(error);
+      return error;
+    }
   };
 }

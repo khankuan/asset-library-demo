@@ -28,7 +28,7 @@ export default class NavBar extends React.Component {
   }
 
   _handleProfile = () => {
-
+    this.context.alt.getActions('NavDrawer').toggleNavDrawer();
   }
 
   _handleUploadClick = () => {
@@ -53,10 +53,9 @@ export default class NavBar extends React.Component {
   renderSignIn() {
     return (
       <li>
-        <Text size="small">
-          {'Already have account? '}
-          <Button type="flat" onClick={ this._handleSignIn }>
-             Sign In
+        <Text size="tiny">
+          <Button type="flat" size="tiny" onClick={ this._handleSignIn }>
+             Already have account? Sign In
           </Button>
         </Text>
       </li>
@@ -66,18 +65,18 @@ export default class NavBar extends React.Component {
   renderProfileButton(authUser) {
     return (
       <li>
-        <Button type='flat' onClick={ this._handleUploadClick }>
+        <Button type="flat" onClick={ this._handleUploadClick }>
           +
           <input
-            ref='upload'
+            ref="upload"
             style={{display: 'none'}}
-            type='file'
-            accept='image/*,audio/*'
+            type="file"
+            accept="image/*,audio/*"
             onChange={ this._handleUpload }
-            value='' />
+            value="" />
         </Button>
         <Button type="flat" onClick={ this._handleProfile }>
-           { authUser.name }
+           Hi, { authUser.name }
         </Button>
       </li>
     );
@@ -87,9 +86,11 @@ export default class NavBar extends React.Component {
     const authUser = this.props.AuthStore.authUser;
 
     return (
-      <div classMame="nav">
+      <div className="nav">
         <ul className="nav-left">
           <li><strong><Link to="/">Home</Link></strong></li>
+          <li><strong><Link to="/category/audio">Audio</Link></strong></li>
+          <li><strong><Link to="/category/image">Images</Link></strong></li>
         </ul>
         <ul className="nav-right">
           {!authUser ? this.renderSignUp() : null}

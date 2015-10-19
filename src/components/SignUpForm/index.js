@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from '../Button';
 import TextField from '../TextField';
+import Text from '../Text';
 
 export default class SignUpForm extends React.Component {
 
@@ -19,9 +20,13 @@ export default class SignUpForm extends React.Component {
   render() {
     return (
       <div className="signup-form">
-        <TextField ref="name" type="text" />
-        <TextField ref="email" type="text" />
-        <TextField ref="password" type="password" />
+        <Text block bold size="large">Welcome onboard!</Text>
+        <TextField ref="name" type="text" placeholder="Your Name"/>
+        <br/>
+        <TextField ref="email" type="text" placeholder="Your Email"/>
+        <br/>
+        <TextField ref="password" type="password" placeholder="Your Password"/>
+        <br/>
         <Button onClick={ this._handleSignUp } >Sign Up</Button>
       </div>
     );

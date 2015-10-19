@@ -1,6 +1,8 @@
+.text { display: inline-block; }
 .bold { font-weight: bold; }
 .italics { font-style: italic; }
 .underline { text-docoration: underline; }
+.block { display: block; }
 
 .text-size-tiny { font-size: 10px; }
 .text-size-small { font-size: 13px; }

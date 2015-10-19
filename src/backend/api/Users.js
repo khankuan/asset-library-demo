@@ -18,7 +18,13 @@ const UserApi = {
   },
 
   populateSession: (req, res, next) => {
-    return req.models.Session.findOne({ token: req.cookies ? req.cookies.token : '' })
+    const token = req.cookies ? req.cookies.token : '';
+    if (!token) {
+      next();
+      return null;
+    }
+
+    return req.models.Session.findOne({ token })
       .then(session => {
         req.session = session;
       })
@@ -36,11 +42,20 @@ const UserApi = {
         user = _user;
         return user.hasPasswordEquals(password);
       })
-      .then(UserApi._createSession.bind(null, req))
+      .then(() => {
+        console.log("pass ok")
+        return UserApi._createSession(req, user);
+      })
       .then(session => {
+        console.log("session", session)
         res.cookie('token', session.token);
-        res.send(user.toObject());
-      }, next);
+        console.log("cookie")
+        res.status(200).send(user.toObject());
+      })
+      .catch(err => {
+        console.log(err);
+        next(err);
+      });
   },
 
   signUp: (req, res, next) => {
@@ -65,6 +80,7 @@ const UserApi = {
         return session.destroy();
       })
       .then(() => {
+        res.cookie('token', '');
         res.send();
       }, next);
   },

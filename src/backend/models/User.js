@@ -20,10 +20,10 @@ const User = sequelize.define('User', {
       const user = this;
       return new Promise((resolve, reject) => {
         bcrypt.compare(password, user.password, (err, res) => {
-          if (res) {
+          if (res && password) {
             resolve(user);
           } else {
-            reject();
+            reject('Invalid username or password');
           }
         });
       });

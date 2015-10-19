@@ -10,20 +10,24 @@ export default class Text extends React.Component {
     underline: React.PropTypes.bool,
     size: React.PropTypes.string,
     padding: React.PropTypes.string,
+    block: React.PropTypes.bool,
     className: React.PropTypes.string,
   }
 
   static defaultProps = {
     size: 'base',
     padding: 'none',
+    block: false,
   }
 
   getClasses() {
     return cx(
+      'text',
       {
         'bold': this.props.bold,
         'italics': this.props.italics,
         'underline': this.props.underline,
+        'block': this.props.block,
       },
       'text-size-' + this.props.size,
       'text-padding-' + this.props.padding,

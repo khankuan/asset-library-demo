@@ -36,7 +36,10 @@ backend(server).then(() => {
   // Register server-side rendering middleware
   // -----------------------------------------------------------------------------
   server.get('*', async (req, res, next) => {
-    if (req.path.indexOf('/api') === 0 || req.path === 'app.js') next();
+    if (req.path.indexOf('/api') === 0 ||
+        req.path.indexOf('/assets') === 0 ||
+        req.path === 'app.js') next();
+
     if (req.path === '/__webpack_hmr') return;
 
     console.log('=== Received request', req.path);
@@ -75,7 +78,9 @@ backend(server).then(() => {
   });
 
   server.get('*', (req, res, next) => {
-    if (req.path.indexOf('/api') === 0 || req.path === 'app.js') next();
+    if (req.path.indexOf('/api') === 0 ||
+        req.path.indexOf('/assets') === 0 ||
+        req.path === 'app.js') next();
 
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
   });

@@ -1,0 +1,34 @@
+import React from 'react';
+import { resolve, context } from 'react-resolver';
+import AltContainer from 'alt/AltContainer';
+
+import Component from './component';
+
+@context('alt')
+@resolve('', (props) => {
+  const alt = props.alt;
+  const store = alt.getStore('CategoryPage').getState();
+  if (store.fetchState === null ||
+      store.category !== props.routeParams.category) {
+    return alt.getActions('CategoryPage').fetchCategory(props.routeParams.category).then(() => {}, () => {});
+  }
+})
+export default class CategoryPage extends React.Component {
+
+  static contextTypes = {
+    alt: React.PropTypes.object.isRequired,
+    routeParams: React.PropTypes.object,
+  }
+
+  render() {
+    return (
+      <AltContainer stores={{
+        CategoryPageStore: this.context.alt.getStore('CategoryPage'),
+        AssetStore: this.context.alt.getStore('Asset'),
+      }}>
+        <Component {...this.props}/>
+      </AltContainer>
+    );
+  }
+
+}

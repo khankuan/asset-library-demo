@@ -2,6 +2,7 @@ import React from 'react';
 
 import Onboarding from '../Onboarding';
 import NavBar from '../NavBar';
+import NavDrawer from '../NavDrawer';
 
 export default class App extends React.Component {
 
@@ -14,6 +15,7 @@ export default class App extends React.Component {
       <div>
         <Onboarding />
         <NavBar />
+        <NavDrawer />
 
         { this.props.children }
       </div>

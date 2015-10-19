@@ -1,0 +1,12 @@
+.grid {
+  width: calc(100% - 40px);
+  margin: 20px;
+}
+
+.grid-item {
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  margin: 24px;
+  vertical-align: top;
+}

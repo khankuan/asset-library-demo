@@ -1,6 +1,6 @@
 import React from 'react';
-import Text from '../../components/Text';
 import Loading from '../../components/Loading';
+import AssetGridView from '../../components/AssetGridView';
 
 export default class HomePage extends React.Component {
 
@@ -30,15 +30,12 @@ export default class HomePage extends React.Component {
 
     return (
       <div>
-        <Text size="large" padding="large" bold>
-          Newest Audio
-        </Text>
-        { JSON.stringify(audioAssets) }
-
-        <Text size="large" padding="large" bold>
-          Newest Images
-        </Text>
-        { JSON.stringify(imageAssets) }
+        <AssetGridView
+          name="Newest Audio"
+          assets={audioAssets} />
+        <AssetGridView
+          name="Newest Images"
+          assets={imageAssets} />
       </div>
     );
   }

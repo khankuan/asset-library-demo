@@ -1,0 +1,25 @@
+.nav-drawer {
+  position: absolute;
+  width: 240px;
+  right: 0;
+  top: 48px;
+  bottom: 0;
+  background: #333;
+}
+
+.nav-drawer-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+
+    a {
+      text-decoration: none;
+      color: white;
+      padding: 8px;
+    }
+
+    padding: 4px;
+  }
+}

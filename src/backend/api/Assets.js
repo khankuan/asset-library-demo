@@ -5,13 +5,13 @@ const AssetApi = {
   getNewest: (req, res, next) => {
     const audioPromise = req.models.Asset.findAll({
       limit: 4,
-      order: '-createdAt',
+      order: 'createdAt DESC',
       where: { category: 'audio' },
     });
 
     const imagePromise = req.models.Asset.findAll({
       limit: 4,
-      order: '-createdAt',
+      order: 'createdAt DESC',
       where: { category: 'image' },
     });
 
@@ -27,7 +27,7 @@ const AssetApi = {
   getByCategory: (req, res, next) => {
     const query = req.query;
     query.limit = query.limit || 10;
-    query.order = 'createdAt';
+    query.order = 'createdAt DESC';
     query.where = {category: req.params.category};
 
     return req.models.Asset.findAll(query)
@@ -54,9 +54,9 @@ const AssetApi = {
   },
 
   createAsset: (req, res, next) => {
-    const file = req.file || {filename: 'Test', mimetype: 'audio/mp3', buffer: 'DATA'};
+    const file = req.file || {name: 'Test', mimetype: 'audio/mp3', buffer: 'DATA'};
     return req.models.Asset.create({
-      title: file.filename,
+      title: file.originalname,
       contentType: file.mimetype,
       data: file.buffer,
     }).then(asset => {

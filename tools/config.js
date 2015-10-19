@@ -31,7 +31,6 @@ const GLOBALS = {
 const JS_LOADER = {
   test: /\.jsx?$/,
   include: [
-    path.resolve(__dirname, '../node_modules/react-routing/src'),
     path.resolve(__dirname, '../src'),
   ],
   loader: 'babel-loader',
@@ -160,8 +159,8 @@ const appConfig = merge({}, config, {
       } : JS_LOADER,
       ...config.module.loaders,
       {
-        test: /\sass|.s?css$/,
-        loader: 'style-loader/useable!css-loader!postcss-loader!sass-loader',
+        test: /\.s?css$/,
+        loader: 'style!css!sass?sourceMap',
       },
     ],
   },
@@ -208,7 +207,7 @@ const serverConfig = merge({}, config, {
       JS_LOADER,
       ...config.module.loaders,
       {
-        test: /\.sass|s?css$/,
+        test: /\.s?css$/,
         loader: 'css!sass?sourceMap',
       },
     ],

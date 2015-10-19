@@ -6,12 +6,12 @@ import Component from './component';
 
 @context('alt')
 @resolve('', ({ alt }) => {
-  const store = alt.stores.HomePage.getState();
-  if (store.newestAssetIds === null) {
-    return alt.getActions('HomePage').fetchNewest().then(() => {}, () => {});
+  const store = alt.getStore('Auth').getState();
+  if (store.authUser === undefined && store.meState !== 'PENDING') {
+    return alt.getActions('Auth').me().then(() => {}, () => {});
   }
 })
-export default class HomePage extends React.Component {
+export default class NavDrawer extends React.Component {
 
   static contextTypes = {
     alt: React.PropTypes.object.isRequired,
@@ -20,10 +20,10 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <AltContainer stores={{
-        HomePageStore: this.context.alt.getStore('HomePage'),
-        AssetStore: this.context.alt.getStore('Asset'),
+        AuthStore: this.context.alt.getStore('Auth'),
+        NavDrawerStore: this.context.alt.getStore('NavDrawer'),
       }}>
-        <Component {...this.props}/>
+        <Component />
       </AltContainer>
     );
   }

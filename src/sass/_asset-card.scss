@@ -1,0 +1,29 @@
+.asset-card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.asset-card-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: block;
+  cursor: pointer;
+}
+
+.asset-download {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  right: 0;
+}
+
+.asset-card-title {
+  position: relative;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+}

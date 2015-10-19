@@ -52,6 +52,19 @@ export default function(api) {
       this.dispatch(error);
       return error;
     }
+
+    signOut() {
+      this.dispatch();
+      return api.User.signOut().then(this.actions.signOutSuccess, this.actions.signOutError);
+    }
+
+    signOutSuccess() {
+      window.location.reload();
+    }
+    
+    signOutError() {
+      window.location.reload();
+    }
   };
 }
 
