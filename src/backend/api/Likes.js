@@ -26,7 +26,7 @@ const LikesApi = {
   likeAsset: (req, res, next) => {
     const userId = req.session.userId;
     const assetId = req.params.assetId;
-    return req.models.Likes.upsert({ userId, assetId })
+    return req.models.Like.upsert({ userId, assetId })
       .then(like => {
         res.send();
       }, next);
@@ -36,7 +36,7 @@ const LikesApi = {
   unlikeAsset: (req, res, next) => {
     const userId = req.session.userId;
     const assetId = req.params.assetId;
-    return req.models.Likes.destroy({ userId, assetId })
+    return req.models.Like.destroy({where: { userId, assetId }})
       .then(like => {
         res.send();
       }, next);

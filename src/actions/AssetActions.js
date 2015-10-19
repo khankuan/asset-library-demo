@@ -34,5 +34,39 @@ export default function(api) {
       this.dispatch(error);
       return error;
     }
+
+    likeAsset(assetId) {
+      this.dispatch(assetId);
+      return api.Like.likeAsset(assetId)
+        .then(this.actions.likeAssetSuccess.bind(null, assetId),
+              this.actions.likeAssetError.bind(null, assetId));
+    }
+
+    likeAssetSuccess(assetId) {
+      this.dispatch(assetId);
+      return assetId;
+    }
+
+    likeAssetError(assetId, error) {
+      this.dispatch(assetId, error);
+      return error;
+    }
+
+    unlikeAsset(assetId) {
+      this.dispatch(assetId);
+      return api.Like.unlikeAsset(assetId)
+        .then(this.actions.unlikeAssetSuccess.bind(null, assetId),
+              this.actions.unlikeAssetError.bind(null, assetId));
+    }
+
+    unlikeAssetSuccess(assetId) {
+      this.dispatch(assetId);
+      return assetId;
+    }
+
+    unlikeAssetError(assetId, error) {
+      this.dispatch(assetId, error);
+      return error;
+    }
   };
 }

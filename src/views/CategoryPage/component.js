@@ -19,6 +19,14 @@ export default class CategoryPage extends React.Component {
     super(props);
   }
 
+  _handleLikeChange = (asset, like) => {
+    if (like) {
+      this.context.alt.getActions('Asset').likeAsset(asset.id);
+    } else {
+      this.context.alt.getActions('Asset').unlikeAsset(asset.id);
+    }
+  }
+
   render() {
     const categoryPageStore = this.props.CategoryPageStore;
     if (categoryPageStore.fetchState !== 'SUCCESS' && !categoryPageStore.categoryAssetIds) {
@@ -40,7 +48,8 @@ export default class CategoryPage extends React.Component {
         <DocumentTitle title={`Category - ${categoryPageStore.category}`} />
         <AssetGridView
           name={`Browsing category: ${categoryPageStore.category}`}
-          assets={categoryAssets} />
+          assets={categoryAssets}
+          onAssetLikeChange={ this._handleLikeChange } />
       </div>
     );
   }

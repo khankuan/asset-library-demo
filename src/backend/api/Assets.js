@@ -1,25 +1,51 @@
 
 const AssetApi = {
 
+  //  Dumbly populates the likedBy attribute with user profile objects
+  _populateAssetsWithLikedBy: (req, inputs) => {
+    const authUser = req.session ? req.session.userId : null;
+    const isArr = Array.isArray(inputs);
+    let assets = inputs;
+    if (!isArr) {
+      assets = [inputs];
+    }
+
+    return Promise.all(assets.map(asset => {
+      return asset.getLikedBy()
+        .then(users => {
+          const assetObj = asset.toObject();
+          assetObj.likedBy = users.map(user => user.toProfile());
+          assetObj.isLiked = users.map(user => user.id).indexOf(authUser) > -1;
+          return assetObj;
+        });
+    })).then(results => {
+      if (!isArr) {
+        return results[0];
+      }
+
+      return results;
+    });
+  },
+
   //  Just grab any 4 asset of category (audio, image) each
   getNewest: (req, res, next) => {
     const audioPromise = req.models.Asset.findAll({
       limit: 4,
       order: 'createdAt DESC',
       where: { category: 'audio' },
-    });
+    }).then(AssetApi._populateAssetsWithLikedBy.bind(null, req));
 
     const imagePromise = req.models.Asset.findAll({
       limit: 4,
       order: 'createdAt DESC',
       where: { category: 'image' },
-    });
+    }).then(AssetApi._populateAssetsWithLikedBy.bind(null, req));
 
     return Promise.all([audioPromise, imagePromise])
       .then(results => {
         res.send({
-          audio: results[0].map(asset => asset.toObject()),
-          image: results[1].map(asset => asset.toObject()),
+          audio: results[0],
+          image: results[1],
         });
       }, next);
   },
@@ -31,16 +57,18 @@ const AssetApi = {
     query.where = {category: req.params.category};
 
     return req.models.Asset.findAll(query)
+      .then(AssetApi._populateAssetsWithLikedBy.bind(null, req))
       .then(assets => {
-        res.send(assets.map(asset => asset.toObject()));
+        res.send(assets);
       }, next);
   },
 
   getAsset: (req, res, next) => {
     const assetId = req.params.assetId;
     return req.models.Asset.findById(assetId)
+      .then(AssetApi._populateAssetsWithLikedBy.bind(null, req))
       .then(asset => {
-        res.send(asset.toObject());
+        res.send(asset);
       }, next);
   },
 

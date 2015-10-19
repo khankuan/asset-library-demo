@@ -9,11 +9,21 @@ export default class AssetGridView extends React.Component {
   static propTypes = {
     name: React.PropTypes.string.isRequired,
     assets: React.PropTypes.array.isRequired,
+    onAssetLikeChange: React.PropTypes.func,
+  }
+
+  _handleAssetLikeChange = (asset, liked) => {
+    if (this.props.onAssetLikeChange) {
+      this.props.onAssetLikeChange(asset, liked);
+    }
   }
 
   renderAsset(asset, index) {
     return (
-      <AssetCard asset={asset} key={index} />
+      <AssetCard
+        asset={asset}
+        key={index}
+        onLikeChange={ this._handleAssetLikeChange.bind(null, asset) } />
     );
   }
 

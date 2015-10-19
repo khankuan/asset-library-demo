@@ -4,11 +4,14 @@ import { Link } from 'react-router';
 import Card from '../Card';
 import Text from '../Text';
 import Button from '../Button';
+import LikeButton from '../LikeButton';
 
 export default class AssetCard extends React.Component {
 
   static propTypes = {
     asset: React.PropTypes.object.isRequired,
+    liked: React.PropTypes.bool,
+    onLikeChange: React.PropTypes.func,
   }
 
   _getBackground(asset) {
@@ -21,9 +24,15 @@ export default class AssetCard extends React.Component {
 
     if (asset.category === 'audio') {
       return {
-        backgroundImage: 'url(/assets/audio.png)',
+        backgroundImage: 'url(/static/audio.png)',
         backgroundSize: 'cover',
       };
+    }
+  }
+
+  _handleLikeClick = () => {
+    if (this.props.onLikeChange) {
+      this.props.onLikeChange(!this.props.asset.isLiked);
     }
   }
 
@@ -39,6 +48,7 @@ export default class AssetCard extends React.Component {
         <Button type="default" size="small" className="asset-download">
           <a href={`/api/assets/${asset.id}/download`} target="_blank" download={asset.title}>Download</a>
         </Button>
+        <LikeButton className="asset-like" liked={ this.props.asset.isLiked } onClick={ this._handleLikeClick }/>
       </Card>
     );
   }

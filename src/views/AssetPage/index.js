@@ -8,10 +8,11 @@ import Component from './component';
 @resolve('', (props) => {
   const alt = props.alt;
   const store = alt.getStore('Asset').getState();
-  const assetId = props.routeParams.assetId;
+  const assetId = props.params.assetId;
 
   //  Always fetch data when initially loaded
   const promise = alt.getActions('Asset').get(assetId).then(() => {}, () => {});
+
   if (!store.assets[assetId]) {
     return promise; //  But only require to resolve if data was not there before
   }
@@ -20,7 +21,7 @@ export default class AssetPage extends React.Component {
 
   static contextTypes = {
     alt: React.PropTypes.object.isRequired,
-    routeParams: React.PropTypes.object,
+    params: React.PropTypes.object,
   }
 
   render() {

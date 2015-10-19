@@ -37,7 +37,7 @@ backend(server).then(() => {
   // -----------------------------------------------------------------------------
   server.get('*', async (req, res, next) => {
     if (req.path.indexOf('/api') === 0 ||
-        req.path.indexOf('/assets') === 0 ||
+        req.path.indexOf('/static') === 0 ||
         req.path === 'app.js') next();
 
     if (req.path === '/__webpack_hmr') return;
@@ -79,7 +79,7 @@ backend(server).then(() => {
 
   server.get('*', (req, res, next) => {
     if (req.path.indexOf('/api') === 0 ||
-        req.path.indexOf('/assets') === 0 ||
+        req.path.indexOf('/static') === 0 ||
         req.path === 'app.js') next();
 
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));

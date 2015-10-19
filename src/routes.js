@@ -16,10 +16,12 @@ const router = (
     location="history">
     <Route path="/" component={App}>
       <IndexRoute component={HomePage} />
-      <Route path="/category/:category">
+      <Route path="category/:category">
         <IndexRoute component={CategoryPage} />
       </Route>
-      <Route path="/assets/:assetId" component={AssetPage} />
+      <Route path="assets/:assetId">
+        <IndexRoute component={AssetPage} />
+      </Route>
     </Route>
   </Router>
 );

@@ -5,21 +5,29 @@ import Loading from '../../components/Loading';
 import Text from '../../components/Text';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
+import LikeButton from '../../components/LikeButton';
 
 export default class AssetPage extends React.Component {
 
   static propTypes = {
     AssetStore: React.PropTypes.object,
-    routeParams: React.PropTypes.object,
+    params: React.PropTypes.object,
   }
 
   static contextTypes = {
     alt: React.PropTypes.object.isRequired,
-    router: React.PropTypes.object,
   }
 
   constructor(props) {
     super(props);
+  }
+
+  _handleLikeClick = (asset) => {
+    if (asset.isLiked) {
+      this.context.alt.getActions('Asset').unlikeAsset(asset.id);
+    } else {
+      this.context.alt.getActions('Asset').likeAsset(asset.id);
+    }
   }
 
   renderImage(asset) {
@@ -40,7 +48,7 @@ export default class AssetPage extends React.Component {
 
   render() {
     const assetStore = this.props.AssetStore;
-    const assetId = this.props.routeParams.assetId;
+    const assetId = this.props.params.assetId;
     const asset = assetStore.assets[assetId];
     if (!asset) {
       return (<Loading />);
@@ -56,6 +64,7 @@ export default class AssetPage extends React.Component {
           <Button type="default">
             <a href={`/api/assets/${assetId}/download`} target="_blank" download={asset.title}>Download</a>
           </Button>
+          <LikeButton liked={ asset.isLiked } onClick={ this._handleLikeClick.bind(null, asset) }/>
         </div>
         { asset.category === 'image' ? this.renderImage(asset) : null }
         { asset.category === 'audio' ? this.renderAudio(asset) : null }

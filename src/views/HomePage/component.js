@@ -18,6 +18,14 @@ export default class HomePage extends React.Component {
     super(props);
   }
 
+  _handleLikeChange = (asset, like) => {
+    if (like) {
+      this.context.alt.getActions('Asset').likeAsset(asset.id);
+    } else {
+      this.context.alt.getActions('Asset').unlikeAsset(asset.id);
+    }
+  }
+
   render() {
     const homePageStore = this.props.HomePageStore;
     if (homePageStore.loading || !homePageStore.newestAssetIds) {
@@ -34,10 +42,12 @@ export default class HomePage extends React.Component {
         <DocumentTitle title="Welcome to Asset Library" />
         <AssetGridView
           name="Newest Audio"
-          assets={audioAssets} />
+          assets={audioAssets}
+          onAssetLikeChange={ this._handleLikeChange } />
         <AssetGridView
           name="Newest Images"
-          assets={imageAssets} />
+          assets={imageAssets}
+          onAssetLikeChange={ this._handleLikeChange } />
       </div>
     );
   }
