@@ -31,8 +31,8 @@ export default class NavDrawer extends React.Component {
     return (
       <div className="nav-drawer">
         <ul className="nav-drawer-items">
-          <li><strong><Link to={`/user/${authUser.id}/likes`}>My Likes</Link></strong></li>
-          <li><strong><Button type="flat" onClick={ this._handleSignOut }>Sign out</Button></strong></li>
+          <li><Link to={`/user/${authUser.id}/likes`}>My Likes</Link></li>
+          <li><Button type="flat" onClick={ this._handleSignOut }>Sign out</Button></li>
         </ul>
       </div>
     );
