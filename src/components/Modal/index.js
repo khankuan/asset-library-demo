@@ -10,10 +10,13 @@ export default class Modal extends React.Component {
   render() {
     return (
       <div className="modal">
-        <div className="modal-close" onClick={ this.props.onClose }>
-          X
+        <div className="backdrop"></div>
+        <div className="content">
+          <div className="modal-close" onClick={ this.props.onClose }>
+            X
+          </div>
+          { this.props.children }
         </div>
-        { this.props.children }
       </div>
     );
   }
