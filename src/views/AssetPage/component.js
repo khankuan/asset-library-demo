@@ -1,4 +1,5 @@
 import React from 'react';
+import DocumentTitle from 'react-document-title';
 
 import Loading from '../../components/Loading';
 import Text from '../../components/Text';
@@ -47,6 +48,7 @@ export default class AssetPage extends React.Component {
 
     return (
       <div style={{ textAlign: 'center' }}>
+        <DocumentTitle title={`Asset - ${asset.title}`} />
         <div>
           <Text size="large" padding="large" bold>
             { asset.title } ({ asset.category })

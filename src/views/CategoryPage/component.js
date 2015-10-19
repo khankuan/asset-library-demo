@@ -2,6 +2,7 @@ import React from 'react';
 import Text from '../../components/Text';
 import Loading from '../../components/Loading';
 import AssetGridView from '../../components/AssetGridView';
+import DocumentTitle from 'react-document-title';
 
 export default class CategoryPage extends React.Component {
 
@@ -36,6 +37,7 @@ export default class CategoryPage extends React.Component {
 
     return (
       <div>
+        <DocumentTitle title={`Category - ${categoryPageStore.category}`} />
         <AssetGridView
           name={`Browsing category: ${categoryPageStore.category}`}
           assets={categoryAssets} />

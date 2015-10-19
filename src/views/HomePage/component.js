@@ -1,6 +1,7 @@
 import React from 'react';
 import Loading from '../../components/Loading';
 import AssetGridView from '../../components/AssetGridView';
+import DocumentTitle from 'react-document-title';
 
 export default class HomePage extends React.Component {
 
@@ -30,6 +31,7 @@ export default class HomePage extends React.Component {
 
     return (
       <div>
+        <DocumentTitle title="Welcome to Asset Library" />
         <AssetGridView
           name="Newest Audio"
           assets={audioAssets} />

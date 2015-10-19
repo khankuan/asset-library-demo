@@ -13,9 +13,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Onboarding />
-        <NavBar />
-        <NavDrawer />
+        <Onboarding {...this.props} />
+        <NavBar {...this.props} />
+        <NavDrawer {...this.props} />
 
         { this.props.children }
       </div>

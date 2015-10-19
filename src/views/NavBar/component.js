@@ -15,7 +15,7 @@ export default class NavBar extends React.Component {
     alt: React.PropTypes.object.isRequired,
   }
 
-  constructor(props) {
+  constructor(props, context) {
     super(props);
   }
 

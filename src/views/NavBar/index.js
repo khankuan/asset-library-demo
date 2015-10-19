@@ -22,7 +22,7 @@ export default class NavBar extends React.Component {
       <AltContainer stores={{
         AuthStore: this.context.alt.getStore('Auth'),
       }}>
-        <Component />
+        <Component {...this.props} />
       </AltContainer>
     );
   }
