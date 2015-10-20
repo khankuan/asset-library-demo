@@ -1,5 +1,5 @@
 
-export default class {
+export default class LikesPageStore {
   constructor() {
     const LikesPageActions = this.alt.getActions('LikesPage');
     const AssetActions = this.alt.getActions('Asset');

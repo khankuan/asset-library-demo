@@ -1,14 +1,16 @@
 
 export default class UserStore {
   constructor() {
-    const UserActions = this.alt.getActions('UserActions');
-    const AuthActions = this.alt.getActions('AuthActions');
+    const UserActions = this.alt.getActions('User');
+    const AuthActions = this.alt.getActions('Auth');
+    const LikeListActions = this.alt.getActions('LikeList');
 
     this.bindListeners({
       onGetSuccess: UserActions.getSuccess,
       onSignUpSuccess: AuthActions.signUpSuccess,
       onSignInSuccess: AuthActions.signInSuccess,
       onMeSuccess: AuthActions.meSuccess,
+      onFetchAssetLikedBySuccess: LikeListActions.fetchAssetLikedBySuccess,
     });
 
     this.state = {
@@ -32,5 +34,6 @@ export default class UserStore {
   onSignUpSuccess(user) { this._setUsers(user); }
   onSignInSuccess(user) { this._setUsers(user); }
   onMeSuccess(user) { this._setUsers(user); }
+  onFetchAssetLikedBySuccess({ users }) { this._setUsers(users); }
 
 }

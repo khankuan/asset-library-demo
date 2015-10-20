@@ -11,13 +11,15 @@ import Component from './component';
   const userStore = alt.getStore('User').getState();
   const promises = [];
 
+  const likesUserId = props.params.likesUserId;
+
   if (likesPageStore.fetchState === null ||
-      likesPageStore.likesUserId !== props.params.likesUserId) {
-    promises.push(alt.getActions('LikesPage').fetchUserLikes(props.params.likesUserId).then(() => {}, () => {}));
+      likesPageStore.likesUserId !== likesUserId) {
+    promises.push(alt.getActions('LikesPage').fetchUserLikes(likesUserId).then(() => {}, () => {}));
   }
 
-  if (!userStore.users[props.params.likesUserId]) {
-    promises.push(alt.getActions('User').get(props.params.likesUserId).then(() => {}, () => {}));
+  if (!userStore.users[likesUserId]) {
+    promises.push(alt.getActions('User').get(likesUserId).then(() => {}, () => {}));
   }
 
   if (promises.length > 0) {
@@ -28,7 +30,7 @@ export default class LikesPage extends React.Component {
 
   static contextTypes = {
     alt: React.PropTypes.object.isRequired,
-    routeParams: React.PropTypes.object,
+    params: React.PropTypes.object,
   }
 
   render() {

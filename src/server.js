@@ -73,6 +73,7 @@ backend(server).then(() => {
       const store = alt.takeSnapshot();
       res.render('app', { html, store });
     }).catch(err => {
+      console.log(err);
       next(err);
     });
   });

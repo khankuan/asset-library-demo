@@ -14,7 +14,7 @@ const AssetApi = {
       return asset.getLikedBy()
         .then(users => {
           const assetObj = asset.toObject();
-          assetObj.likedBy = users.map(user => user.toProfile());
+          assetObj.likedByCount = users.length;
           assetObj.isLiked = users.map(user => user.id).indexOf(authUser) > -1;
           return assetObj;
         });
@@ -43,7 +43,7 @@ const AssetApi = {
 
     return Promise.all([audioPromise, imagePromise])
       .then(results => {
-        res.send({
+        res.status(200).send({
           audio: results[0],
           image: results[1],
         });
@@ -59,7 +59,7 @@ const AssetApi = {
     return req.models.Asset.findAll(query)
       .then(AssetApi._populateAssetsWithLikedBy.bind(null, req))
       .then(assets => {
-        res.send(assets);
+        res.status(200).send(assets);
       }, next);
   },
 
@@ -68,7 +68,7 @@ const AssetApi = {
     return req.models.Asset.findById(assetId)
       .then(AssetApi._populateAssetsWithLikedBy.bind(null, req))
       .then(asset => {
-        res.send(asset);
+        res.status(200).send(asset);
       }, next);
   },
 
@@ -88,7 +88,7 @@ const AssetApi = {
       contentType: file.mimetype,
       data: file.buffer,
     }).then(asset => {
-      res.send(asset.toObject());
+      res.status(200).send(asset.toObject());
     }, next);
   },
 

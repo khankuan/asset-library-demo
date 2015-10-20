@@ -43,7 +43,7 @@ export default class LikesPage extends React.Component {
 
     if (likesAssets.length === 0) {
       return (
-        <Text padding="base">No assets found under {name}</Text>
+        <Text padding="base">No assets liked by {name}</Text>
       );
     }
 

@@ -15,6 +15,7 @@ export default class AppAlt extends Alt {
     this.addActions('LikesPage', require('../views/LikesPage/actions')(api));
     this.addActions('Onboarding', require('../views/Onboarding/actions')(api));
     this.addActions('NavDrawer', require('../views/NavDrawer/actions')(api));
+    this.addActions('LikeList', require('../views/LikeList/actions')(api));
 
     //  Stores (must be after actions)
     this.addStore('Auth', require('../stores/AuthStore'));
@@ -26,6 +27,7 @@ export default class AppAlt extends Alt {
     this.addStore('LikesPage', require('../views/LikesPage/store'));
     this.addStore('Onboarding', require('../views/Onboarding/store'));
     this.addStore('NavDrawer', require('../views/NavDrawer/store'));
+    this.addStore('LikeList', require('../views/LikeList/store'));
 
     if (typeof window !== 'undefined') window.alt = this;
   }

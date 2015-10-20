@@ -6,6 +6,7 @@ import Text from '../../components/Text';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import LikeButton from '../../components/LikeButton';
+import LikeList from '../LikeList';
 
 export default class AssetPage extends React.Component {
 
@@ -68,6 +69,7 @@ export default class AssetPage extends React.Component {
         </div>
         { asset.category === 'image' ? this.renderImage(asset) : null }
         { asset.category === 'audio' ? this.renderAudio(asset) : null }
+        <LikeList assetId={ asset.id } />
       </div>
     );
   }

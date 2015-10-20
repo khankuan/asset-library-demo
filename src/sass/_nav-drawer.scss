@@ -11,16 +11,20 @@ ul.nav-drawer-items {
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-top: 8px;
 
   li {
-    height: 32px;
-    line-height: 32px;
 
-    a {
+    a,button {
+      text-align: left;
       text-decoration: none;
       color: white;
-      padding: 8px;
+      padding: 12px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    a:hover,button:hover {
+      background: #999;
     }
 
     padding: 4px;

@@ -17,7 +17,7 @@ export default class CategoryPage extends React.Component {
 
   static contextTypes = {
     alt: React.PropTypes.object.isRequired,
-    routeParams: React.PropTypes.object,
+    params: React.PropTypes.object,
   }
 
   render() {

@@ -16,8 +16,8 @@ export default class Asset {
     return this.request.get('/assets/' + assetId);
   }
 
-  getAssetLikedUsers(assetId) {
-    return this.request.get('/assets/' + assetId + '/likes');
+  fetchAssetLikedBy(assetId) {
+    return this.request.get('/assets/' + assetId + '/liked');
   }
 
   createAsset(file) {

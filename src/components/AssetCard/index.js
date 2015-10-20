@@ -5,6 +5,8 @@ import Card from '../Card';
 import Text from '../Text';
 import Button from '../Button';
 import LikeButton from '../LikeButton';
+import Modal from '../Modal';
+import LikeList from '../../views/LikeList';
 
 export default class AssetCard extends React.Component {
 
@@ -13,6 +15,8 @@ export default class AssetCard extends React.Component {
     liked: React.PropTypes.bool,
     onLikeChange: React.PropTypes.func,
   }
+
+  state = {}
 
   _getBackground(asset) {
     if (asset.category === 'image') {
@@ -36,6 +40,28 @@ export default class AssetCard extends React.Component {
     }
   }
 
+  _handleLikeListClick = () => {
+    this.setState({ showLikeList: true });
+  }
+
+  _handleLikeListClose = () => {
+    this.setState({ showLikeList: false });
+  }
+
+  renderLikeListModal() {
+    if (!this.state.showLikeList) {
+      return null;
+    }
+
+    const asset = this.props.asset;
+
+    return (
+      <Modal onClose={ this._handleLikeListClose }>
+        <LikeList assetId={ asset.id } />
+      </Modal>
+    );
+  }
+
   render() {
     const asset = this.props.asset;
 
@@ -44,11 +70,18 @@ export default class AssetCard extends React.Component {
         <Link className="asset-card-link" to={`/assets/${asset.id}`} />
         <Text block className="asset-card-title">{ asset.title }
           <Text size="tiny" padding="base">{ asset.category }</Text>
+          <div className="asset-card-liked-by">
+            <Button type="flat" onClick={ this._handleLikeListClick } >
+              { asset.likedByCount } liked this
+            </Button>
+          </div>
         </Text>
         <Button type="default" size="small" className="asset-download">
           <a href={`/api/assets/${asset.id}/download`} target="_blank" download={asset.title}>Download</a>
         </Button>
-        <LikeButton className="asset-like" liked={ this.props.asset.isLiked } onClick={ this._handleLikeClick }/>
+        <LikeButton className="asset-card-like" liked={ this.props.asset.isLiked } onClick={ this._handleLikeClick }/>
+
+        { this.renderLikeListModal() }
       </Card>
     );
   }

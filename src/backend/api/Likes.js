@@ -7,22 +7,24 @@ const LikesApi = {
     const userId = req.params.userId;
     return req.models.Like.findAll({where: { userId }})
       .then(likes => {
-        return req.models.Asset.findAll({id: {$in: likes.map(like => like.assetId) }});
+        const assetIds = likes.map(like => like.assetId);
+        return req.models.Asset.findAll({where: {id: assetIds }});
       })
       .then(AssetApi._populateAssetsWithLikedBy.bind(null, req))
       .then(assets => {
-        res.send(assets);
+        res.status(200).send(assets);
       }, next);
   },
 
   getAssetLikedUsers: (req, res, next) => {
     const assetId = req.params.assetId;
-    return req.models.Likes.findAll({ assetId })
+    return req.models.Like.findAll({where: { assetId }})
       .then(likes => {
-        return req.models.User.findAll({id: {$in: likes.map(like => like.userId) }});
+        const likeUserIds = likes.map(like => like.userId);
+        return req.models.User.findAll({where: {id: likeUserIds}});
       })
       .then(users => {
-        res.send(users.map(user => user.toProfile()));
+        res.status(200).send(users.map(user => user.toProfile()));
       }, next);
   },
 
@@ -31,7 +33,7 @@ const LikesApi = {
     const assetId = req.params.assetId;
     return req.models.Like.upsert({ userId, assetId })
       .then(like => {
-        res.send();
+        res.status(200).send();
       }, next);
   },
 
@@ -41,7 +43,7 @@ const LikesApi = {
     const assetId = req.params.assetId;
     return req.models.Like.destroy({where: { userId, assetId }})
       .then(like => {
-        res.send();
+        res.status(200).send();
       }, next);
   },
 
