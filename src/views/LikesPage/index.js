@@ -15,7 +15,11 @@ import Component from './component';
 
   if (likesPageStore.fetchState === null ||
       likesPageStore.likesUserId !== likesUserId) {
-    promises.push(alt.getActions('LikesPage').fetchUserLikes(likesUserId).then(() => {}, () => {}));
+    promises.push(alt.getActions('LikesPage').fetchUserLikes(likesUserId));
+  } else {
+    setTimeout(() => {
+      alt.getActions('LikesPage').fetchUserLikes(likesUserId);  //  Pull user likes again to refresh
+    }, 0);
   }
 
   if (!userStore.users[likesUserId]) {
