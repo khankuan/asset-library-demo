@@ -7,6 +7,7 @@ import HomePage from './views/HomePage';
 import App from './views/App';
 import CategoryPage from './views/CategoryPage';
 import AssetPage from './views/AssetPage';
+import LikesPage from './views/LikesPage';
 
 import './sass/index.scss';
 
@@ -21,6 +22,9 @@ const router = (
       </Route>
       <Route path="assets/:assetId">
         <IndexRoute component={AssetPage} />
+      </Route>
+      <Route path="users/:likesUserId/likes">
+        <IndexRoute component={LikesPage} />
       </Route>
     </Route>
   </Router>

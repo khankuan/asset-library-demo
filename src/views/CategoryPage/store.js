@@ -1,5 +1,5 @@
 
-export default class OnboardingStore {
+export default class {
   constructor() {
     const CategoryPageActions = this.alt.getActions('CategoryPage');
     const AssetActions = this.alt.getActions('Asset');

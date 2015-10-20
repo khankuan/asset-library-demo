@@ -1,14 +1,17 @@
+import AssetApi from './Assets';
+
 const LikesApi = {
 
   /*  Assets Like */
   getUserLikedAssets: (req, res, next) => {
     const userId = req.params.userId;
-    return req.models.Likes.findAll({ userId })
+    return req.models.Like.findAll({where: { userId }})
       .then(likes => {
-        return req.models.Assets.findAll({id: {$in: likes.map(like => like.assetId) }});
+        return req.models.Asset.findAll({id: {$in: likes.map(like => like.assetId) }});
       })
+      .then(AssetApi._populateAssetsWithLikedBy.bind(null, req))
       .then(assets => {
-        res.send(assets.map(asset => asset.toObject()));
+        res.send(assets);
       }, next);
   },
 

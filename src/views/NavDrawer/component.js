@@ -22,6 +22,10 @@ export default class NavDrawer extends React.Component {
     this.context.alt.getActions('Auth').signOut();
   }
 
+  _handleClose = () => {
+    this.context.alt.getActions('NavDrawer').toggleNavDrawer();
+  }
+
   render() {
     if (!this.props.NavDrawerStore.show) {
       return null;
@@ -30,8 +34,8 @@ export default class NavDrawer extends React.Component {
 
     return (
       <div className="nav-drawer">
-        <ul className="nav-drawer-items">
-          <li><Link to={`/user/${authUser.id}/likes`}>My Likes</Link></li>
+        <ul className="nav-drawer-items" onClick={ this._handleClose }>
+          <li><Link to={`/users/${authUser.id}/likes`}>My Likes</Link></li>
           <li><Button type="flat" onClick={ this._handleSignOut }>Sign out</Button></li>
         </ul>
       </div>

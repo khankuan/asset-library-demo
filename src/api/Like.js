@@ -10,4 +10,8 @@ export default class Like {
   unlikeAsset(assetId) {
     return this.request.post(`/users/assets/${assetId}/unlike`);
   }
+
+  fetchUserLikes(userId) {
+    return this.request.get(`/users/${userId}/likes`);
+  }
 }

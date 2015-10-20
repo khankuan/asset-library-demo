@@ -23,7 +23,7 @@ export default class User {
     return this.request.get('/users/me');
   }
 
-  getUser(userId) {
+  get(userId) {
     return this.request.get('/users/' + userId);
   }
 }

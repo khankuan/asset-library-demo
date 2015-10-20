@@ -14,7 +14,7 @@ module.exports = (server) => {
   server.post('/api/users/signout', UserApi.hasSession, UserApi.signOut);
   server.get('/api/users/me', UserApi.hasSession, UserApi.me);
   server.get('/api/users/:userId', UserApi.get);
-  server.get('/api/users/:userId/assets/likes', LikeApi.getUserLikedAssets);
+  server.get('/api/users/:userId/likes', LikeApi.getUserLikedAssets);
   server.post('/api/users/assets/:assetId/like', UserApi.hasSession, LikeApi.likeAsset);
   server.post('/api/users/assets/:assetId/unlike', UserApi.hasSession, LikeApi.unlikeAsset);
 
