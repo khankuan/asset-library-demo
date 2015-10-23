@@ -1,3 +1,5 @@
+//  Universal http client
+
 import superagent from 'superagent';
 
 /*

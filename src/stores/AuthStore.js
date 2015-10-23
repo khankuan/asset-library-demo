@@ -1,3 +1,4 @@
+//  Authentication store: Contains all authentication/session states
 
 export default class AuthStore {
   constructor() {

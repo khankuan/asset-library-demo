@@ -1,6 +1,7 @@
 
 import Alt from 'alt';
 
+//  Alt class
 export default class AppAlt extends Alt {
   constructor(api) {
     super();

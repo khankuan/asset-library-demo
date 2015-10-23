@@ -1,4 +1,6 @@
-
+//  This store  handles 'Like' relationship between user and asset.
+//  In the future if there are other use cases that needs the relationship data,
+//  we can refactor this into a global store
 export default class LikeListStore {
   constructor() {
     const LikeListActions = this.alt.getActions('LikeList');

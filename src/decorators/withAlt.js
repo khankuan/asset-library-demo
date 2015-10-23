@@ -1,5 +1,6 @@
 import React from 'react';
 
+//  Pulls alt as context
 export default function(alt) {
   return (ComposedComponent) => class WithAlt extends React.Component {
     static childContextTypes = {

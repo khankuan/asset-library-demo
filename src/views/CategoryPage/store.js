@@ -1,4 +1,5 @@
-
+//  Store for Page: Note that this store only stores id and component depends on global asset store as truth.
+//  Note that page/component stores often contain "app states". View states are stored here for consistency and easy debugging.
 export default class {
   constructor() {
     const CategoryPageActions = this.alt.getActions('CategoryPage');

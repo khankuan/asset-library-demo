@@ -1,4 +1,4 @@
-
+//  Similar to NavDrawer
 export default class OnboardingStore {
   constructor() {
     const OnboardingActions = this.alt.getActions('Onboarding');

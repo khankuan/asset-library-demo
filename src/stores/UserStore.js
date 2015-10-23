@@ -1,3 +1,7 @@
+//  Global store for users.
+//  Authenticated user is "duplicated" and store here for simplicty.
+//  The advantage is an easy way to retrieve any user profile, otherwise there will be lots of if else.
+//  The disadvantage is this store needs to listen to changes made to the current user.
 
 export default class UserStore {
   constructor() {

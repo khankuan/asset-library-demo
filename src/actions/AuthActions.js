@@ -1,3 +1,4 @@
+//  Signing out does a refresh for safely. Technically it is not necessary as long as we reset the stores nicely
 
 export default function(api) {
   return class AuthActions {
@@ -61,7 +62,7 @@ export default function(api) {
     signOutSuccess() {
       window.location.reload();
     }
-    
+
     signOutError() {
       window.location.reload();
     }

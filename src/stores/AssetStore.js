@@ -1,3 +1,4 @@
+//  Global store for all asset objects.
 
 export default class AssetStore {
   constructor() {
