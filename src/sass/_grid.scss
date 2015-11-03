@@ -5,8 +5,9 @@
 
 .grid-item {
   display: inline-block;
-  width: 240px;
-  height: 240px;
-  margin: 24px;
   vertical-align: top;
+  position: absolute;
+  transition-property: top, left;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
 }
