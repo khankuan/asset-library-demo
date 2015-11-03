@@ -1,12 +1,53 @@
 .grid {
   width: calc(100% - 40px);
   margin: 20px;
+  padding: 20px;
+  padding-bottom: 0;
 }
 
 .grid-item {
-  display: inline-block;
   width: 240px;
   height: 240px;
-  margin: 24px;
+}
+
+.grid-animate {
   vertical-align: top;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.grid-animate-enter {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+
+.grid-animate-enter.grid-animate-enter-active {
+  opacity: 1;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 240px;
+  height: 240px;
+  transition: all 500ms ease-out;
+}
+
+.grid-animate-leave {
+  opacity: 1;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 240px;
+  height: 240px;
+}
+
+.grid-animate-leave.grid-animate-leave-active {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  transition: all 500ms ease-out;
 }

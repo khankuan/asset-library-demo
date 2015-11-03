@@ -9,6 +9,8 @@ export default class LikesPageStore {
       onFetchUserLikesSuccess: LikesPageActions.fetchUserLikesSuccess,
       onFetchUserLikesError: LikesPageActions.fetchUserLikesError,
       onCreateSuccess: AssetActions.createSuccess,
+      onLikeAsset: AssetActions.likeAsset,
+      onUnlikeAsset: AssetActions.unlikeAsset,
     });
 
     this.state = {
@@ -39,6 +41,22 @@ export default class LikesPageStore {
     if (this.state.likesUserId === asset.likesUserId) {
       const likesAssetIds = this.state.likesAssetIds;
       likesAssetIds.unshift(asset.id);
+      this.setState({ likesAssetIds });
+    }
+  }
+
+  onLikeAsset(assetId) {
+    const likesAssetIds = this.state.likesAssetIds;
+    if (likesAssetIds && likesAssetIds.indexOf(assetId) === -1) {
+      likesAssetIds.push(assetId);
+      this.setState({ likesAssetIds });
+    }
+  }
+
+  onUnlikeAsset(assetId) {
+    const likesAssetIds = this.state.likesAssetIds;
+    if (likesAssetIds) {
+      likesAssetIds.splice(likesAssetIds.indexOf(assetId), 1);
       this.setState({ likesAssetIds });
     }
   }

@@ -22,7 +22,7 @@ export default class AssetGridView extends React.Component {
     return (
       <AssetCard
         asset={asset}
-        key={index}
+        key={asset.id}
         onLikeChange={ this._handleAssetLikeChange.bind(null, asset) } />
     );
   }
